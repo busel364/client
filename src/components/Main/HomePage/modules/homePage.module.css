@@ -1,0 +1,19 @@
+.servicesLink{
+    text-decoration: none;
+    color: black;
+}
+
+.servicesLink:hover{
+    color: black;
+}
+
+.imgServiceBlock {
+    height: 250px;
+    width: 250px;
+    background-color: black;
+    opacity: 0.8;
+}
+
+.imgServiceBlock:hover {
+    opacity: 1;
+}

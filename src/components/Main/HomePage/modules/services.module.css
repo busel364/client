@@ -1,0 +1,89 @@
+.divUser {
+    transition: 0.3s;
+}
+
+.divBestUser {
+    transition: 0.3s;
+}
+
+.divBestUser:hover {
+    transition: 0.3s;
+    opacity: 0.8;
+}
+
+.img {
+    transition: 0.3s;
+    opacity: 1;
+}
+
+.img:hover {
+    transition: 0.3s;
+    opacity: 0.8;
+}
+
+.accImg {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 639px) {
+
+    .accImg {
+        margin: 0 auto !important;
+    }
+
+    .divUser {
+        text-align: center;
+    }
+
+    .img {
+        margin: 0 auto !important;
+    }
+}
+
+@media screen and (min-width: 639px) {
+    .accImg {
+        margin-left: 85%;
+    }
+
+    .img{
+        margin: 0 auto !important;
+    }
+}
+
+
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel__list {
+    display: flex;
+    overflow: hidden;
+    list-style: none;
+    height: 640px;
+    /* padding: 2em 0 3em;
+    margin: 0;
+    contain: layout;
+    isolation: isolate; */
+}
+
+.carousel__item {
+    width: 8%;
+    /* display: grid;
+    position: relative;
+    align-content: start;
+    margin: 0 10px;
+    padding: 0;
+    flex: 1 1 10%;
+    height: var(--height);
+    overflow: hidden; 
+    background: rgba(255,255,255,0.2); */
+    background: #c9c6c7;
+    border-radius: 16px;
+    transform: translate3d(0,0,0.1px);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 15px 2px, rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    /* contain: layout;
+    isolation: isolate; */
+}
+
