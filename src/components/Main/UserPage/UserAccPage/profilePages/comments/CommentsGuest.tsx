@@ -40,7 +40,7 @@ const CommentsGuest = ({ item }: Props) => {
         </div>
         :
         null}
-      <div className='container'>
+      <div className='container p-0'>
         {arr
           .sort((a, b) => a.updatedAt.toLowerCase() < b.updatedAt.toLowerCase() ? 1 : -1)
           .filter((v, i) => (current - 1) * 20 < i * current + 1 && i * current < (current * 20) + 1)

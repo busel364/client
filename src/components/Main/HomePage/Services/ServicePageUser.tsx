@@ -6,6 +6,7 @@ import Paragraph from 'antd/es/typography/Paragraph'
 import { AppDispatch } from '../../../../app/store'
 import { Post } from '../../../../utils/types/PostTypes'
 import { useNavigate } from 'react-router-dom'
+import { Switch } from 'antd'
 
 
 interface Props {
@@ -45,8 +46,6 @@ const ServicePageUser = ({ user }: Props) => {
   }
 
   useEffect(() => {
-    console.log(ellipsis);
-
     if (!user.description?.main) {
       setElepsis(false);
       if (user.description?.experience || user.description?.specialization!.length! > 0) {
@@ -54,6 +53,7 @@ const ServicePageUser = ({ user }: Props) => {
       }
     }
   }, [])
+
 
   useEffect(() => {
     getPostsById(user._id!);
@@ -84,7 +84,20 @@ const ServicePageUser = ({ user }: Props) => {
         </div>
       </div>
       <div>
-        <Paragraph className='pt-4 text-end' style={{ color: 'whitesmoke', fontSize: '1.2rem' }} ellipsis={{ rows: 2, expandable: true, symbol: 'עוד' }} onClick={()=>setElepsis(false)}>
+        {user.description?.main || user.description?.experience || user.description?.specialization?.length! > 0 || (grades?.price && grades.quality && grades.ratio && grades.times) ?
+          < Switch
+            checked={!ellipsis}
+            onChange={() => {
+              setElepsis(!ellipsis);
+            }}
+          />
+
+          :
+
+          null
+        }
+        <Paragraph className='pt-4 text-end' style={{ direction: 'rtl', color: 'whitesmoke', fontSize: '1.2rem', display: 'block', transition: '0.3s' }} ellipsis={ellipsis ? { rows: 2, expandable: true, symbol: ' ' } : ellipsis} >
+
           {user.description?.main}<br />
           {user.description?.experience ? <span className='row'><b style={{ fontWeight: '400' }}>:ותק בתחום </b><p className='col' style={{ fontWeight: '100' }}>{user.description?.experience} </p></span> : null}
           {user.description?.specialization?.length! > 0 ?
@@ -96,7 +109,7 @@ const ServicePageUser = ({ user }: Props) => {
             null}
           {grades ?
             <div className='row'>
-              <div className='col-sm-0 col-lg-6'></div>
+              {/* <div className='col-sm-0 col-lg-6'></div> */}
               <div className='row col-sm-12 col-lg-6 text-end'>
                 {grades.ratio ?
                   <p className='col'>
@@ -140,6 +153,7 @@ const ServicePageUser = ({ user }: Props) => {
                   : null}
               </div>
             </div>
+
 
             :
 

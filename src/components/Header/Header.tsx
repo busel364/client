@@ -71,9 +71,13 @@ const Header = () => {
             <div className={`text-center ${!isOn ? visible ? styles.header : `${styles.header} ${styles.headerHidden}` : styles.header}`} >
                 <Navbar collapseOnSelect expand="lg" bg={mode ? 'light' : 'dark'} variant={mode ? 'light' : 'dark'} expanded={isOn} className='py-2 '>
                     <Container>
-                        <Navbar.Brand href="#home" className='p-0 m-0 container' style={{ width: '160px' }}>
+                        <Navbar.Brand href="/" className='p-0 m-0 container' style={{ width: '160px' }}>
                             <div className='container-fluid row ms-0 ps-0' style={{ width: '340px' }}>
-
+                                <img 
+                                style={{height:'60px', width:'90px'}}
+                                title='עמוד בית'
+                                alt='מצאדון'
+                                src={mode? require('../../utils/imgs/4-removebg-preview.png'):require('../../utils/imgs/3-removebg-preview.png')}/>
                             </div>
                         </Navbar.Brand>
                         <div onClick={() => setIsOn(prev => !prev)}>

@@ -32,7 +32,7 @@ const HeaderServices = () => {
         //         </p>
         //     </NavDropdown.Item>)}
         // </NavDropdown>
-        <Nav.Link href="services text-center" className={`${mode ? styles.lightnavItem : styles.darknavItem} px-2`} style={{ fontSize: '1.5rem', fontWeight: '300' }}>
+        <Nav.Link href="services" className={`${mode ? styles.lightnavItem : styles.darknavItem} px-2`} style={{ fontSize: '1.5rem', fontWeight: '300' }}>
             שירותים
         </Nav.Link>
     )

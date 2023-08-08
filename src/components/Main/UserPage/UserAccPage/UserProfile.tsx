@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import UserGuestPage from './UserGuestPage';
 import UserLogginedPage from './UserLogginedPage';
 import { getPostsById } from '../../../../reducers/AsyncActions/PostsActions';
+import UserLogginedPageNotPartner from './UserLogginedPageNotPartner';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
     item: UserData
@@ -13,6 +15,8 @@ interface Props {
 const UserProfile = ({ item }: Props) => {
 
     const dispatch = useAppDispatch();
+
+    const navigate = useNavigate();
 
     const user = useAppSelector(state => state.user);
 
@@ -27,11 +31,18 @@ const UserProfile = ({ item }: Props) => {
 
     }, [item._id])
 
+    useEffect(() => {
+        if ((user._id !== item._id) && !item.roles?.toString().toLocaleLowerCase().includes('user')) {
+            navigate('/');
+        }
+    }, [])
+
+
 
     if (user._id === item._id) {
-        return <UserLogginedPage />
+        return user.roles?.toString().toLocaleLowerCase().includes('user') ? <UserLogginedPage /> : <UserLogginedPageNotPartner />;
     } else {
-        return <UserGuestPage item={item} />
+        return item.roles?.toString().toLocaleLowerCase().includes('user') ? <UserGuestPage item={item} /> : <>{navigate('/')}</>;
     }
 }
 

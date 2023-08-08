@@ -55,7 +55,7 @@ const HeaderChangingNav = () => {
                         dispatch(logOut())
                         setIsOn(true)
                     }}
-                    className={`text-center ${styles.lightnavItem}`}
+                    className={`text-center ${styles.lightnavItem} p-0`}
                     style={{ fontSize: '1.2rem', color: 'black' }}
                     href='/'>
                     {language === 'he' ? 'להתנתק' : language === 'ru' ? 'Выйти' : 'Log out'}

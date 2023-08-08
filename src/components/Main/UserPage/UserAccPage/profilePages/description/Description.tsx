@@ -6,10 +6,11 @@ import DescriptionChanger from './DescriptionChanger'
 import DescriptionGuest from './DescriptionGuest'
 
 interface Props {
-  description: DescriptionUser | null
+  description: DescriptionUser | null,
+  _id:string
 }
 
-const Description = ({ description }: Props) => {
+const Description = ({ description, _id }: Props) => {
 
   const [isOn, setIsOn] = useState(false);
 
@@ -34,7 +35,7 @@ const Description = ({ description }: Props) => {
     :
 
     <div>
-      <DescriptionChanger setIsOn={setIsOn} description={description} />
+      <DescriptionChanger variant={1} setIsOn={setIsOn} description={description} _id={_id}/>
     </div>
 
   )

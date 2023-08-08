@@ -34,7 +34,7 @@ const Questions = ({ questionsAndAnswers }: Props) => {
 
 
   return (questionsAndAnswers && questionsAndAnswers.length>0?
-    <div className='container-fluid m-0 pt-5 row'>
+    <div className='container-fluid m-0 pb-5 pt-5 row'>
       <div className='row row-cols-3 col-sm-12 col-md-8 col-lg-4' style={{ margin: '0 auto' }}>
         <div className={`col text-center  ${userAccStyle.blockChangerItem}`} style={{ color: 'whitesmoke' }}
           onClick={() => setIsOn(true)}>
@@ -60,7 +60,7 @@ const Questions = ({ questionsAndAnswers }: Props) => {
 
     :
 
-    <div>
+    <div className='pb-5'>
       <NullPrice />
     </div>
   )

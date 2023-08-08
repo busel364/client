@@ -8,10 +8,12 @@ const RegisterPage = () => {
     const mode = useAppSelector(state => state.mode);
 
     return (
-        <div className={`container-fluid row py-5 mb-5 px-0 mx-0 ${mode ? styles.loginBody__light : styles.loginBody__dark}`}
-        // style={{backgroundColor:mode?'whitesmoke':'#333'}}
+        <div className={`container-fluid row py-5 px-0 mx-0 ${mode ? styles.loginBody__light : styles.loginBody__dark}`}
+        style={{margin:'60px'}}
         >
-            <RegisterForm />
+            <div className='my-5'>
+                <RegisterForm />
+            </div>
         </div>
     )
 }

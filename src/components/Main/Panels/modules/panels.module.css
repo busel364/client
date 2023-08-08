@@ -1,0 +1,153 @@
+.divContainer{
+    /* top: 150px; */
+    /* padding-top: 150px; */
+    left: 0;
+    top: 0;
+    position: absolute;
+    /* min-height: 650px; */
+    height: 100vh;
+    width: 100%;
+    margin: 0 0;
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
+}
+
+.divBlock{
+    left: 0;
+    /* padding-top: 200px; */
+    /* margin-top: -200px ; */
+    z-index: 20;
+    position: absolute;
+    height: 100vh;
+    width: 98.9vw;
+    backdrop-filter: blur(5px);
+    /* overflow: hidden; */
+}
+
+.center {
+    position: relative;
+    /* position: fixed; */
+    margin: 0 auto;
+    padding-top: 200px;
+    /* margin-bottom: -50px; */
+    top: -10%;
+    /* left: 50%; */
+    /* bottom: -100%; */
+    /* bottom:0; */
+    /* transform: translate(-50%, -50%); */
+    background: white;
+    border-radius: 10px;
+    padding: 0 24px;
+}
+
+.plusSquare {
+    font-size: 3rem;
+    transition: 0.25s;
+    position: absolute;
+    top: 0;
+    left: -15px;
+}
+
+.plusSquare:hover {
+    font-size: 3.5rem;
+    transition: 0.25s;
+    color: #666666;
+}
+
+.newNewsPostButton {
+    margin: 0 auto;
+    width: 230px;
+    background-color: inherit;
+    color: #333;
+    font-size: 1.5rem;
+    border: 2px solid #333;
+    transition: 0.5s;
+}
+
+.newNewsPostButton:hover {
+    background-color: rgb(51, 51, 51);
+    color: whitesmoke;
+    transition: 0.3s;
+}
+
+.pass {
+    margin: -5px 0px 15px 5px;
+    color: #a6a6a6;
+    cursor: pointer;
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+
+.pass:hover {
+    text-decoration: underline;
+    color: #a6a6a6;
+}
+
+.secondRoleSelector{
+    display: none ;
+}
+
+.firstRoleSelector {
+    display: inline-block ;
+}
+
+@media screen and (max-width: 474px) {
+    .secondRoleSelector {
+        display: inline-flex !important;
+    }
+
+    .firstRoleSelector {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 474px) {
+    .secondRoleSelector {
+        display: none !important;
+    }
+
+    .firstRoleSelector {
+        display: inline-block !important;
+    }
+}
+
+.techBlock{
+    background-color: whitesmoke;
+    overflow: hidden;
+}
+
+.sendIcon:hover {
+    color: grey;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.techTextArea{
+    /* position: fixed; */
+    /* bottom: 0; */
+    resize: none;
+    /* min-height:4rem; */
+    height: 78px;
+    color: black;
+    font-size: 1.3rem;
+    background-color: white;
+    direction: rtl;
+}
+.techTextArea::placeholder{
+    color: black;
+}
+
+.techTextArea::-webkit-scrollbar {
+    width: 5px;
+}
+
+.techTextArea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: inherit;
+}
+
+.techTextArea::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  /* outline: none; */
+}

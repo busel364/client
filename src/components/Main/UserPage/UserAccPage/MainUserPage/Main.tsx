@@ -14,7 +14,7 @@ const Main = ({ setIsSettingsOn }: Props) => {
     const { user, posts } = useAppSelector(state => state);
 
     const [currentPage, setCurrentPage] = useState('חוות דעת');
-    const t = ["שאלות", "גרפים", "אודות", 'מחירים', 'חוות דעת'];
+    const t = ['חוות דעת', 'מחירים', "אודות", "גרפים", "שאלות"];
 
     const [rotate, setRotate] = useState(false);
     const [grade, setGrade] = useState(0);
@@ -26,13 +26,14 @@ const Main = ({ setIsSettingsOn }: Props) => {
             //     (acc, post) => acc +
             //         (post.grades.price + post.grades.quality +
             //             post.grades.ratio + post.grades.times), 0) / dec;
-            const value = user.grades!.reduce((acc,value)=>acc+value,0)/user.grades!.length;
+            const value = user.grades!.reduce((acc, value) => acc + value, 0) / user.grades!.length;
             setGrade(Number.parseFloat(value.toFixed(2)));
-        }else{
+        } else {
             setGrade(0);
         }
-    }, [posts,user])
-    
+        setTimeout(() => window.scrollTo(0, 0), 0);
+    }, [posts, user])
+
 
     return (
         <div
@@ -99,7 +100,7 @@ const Main = ({ setIsSettingsOn }: Props) => {
                 <div className='row m-0' style={{ borderTop: '2px solid white', borderBottom: '2px solid white' }}>
                     <div className='col-0 col-sm-3 col-md-2 col-lg-4 col-xl-6'></div>
                     <div className={`col-sm-12 col-md-10 col-lg-8 col-xl-6 m-0 p-0 ${styles.blockChanger1}`}>
-                        <div className={`${styles.blockChanger2} row`}>
+                        <div className={`${styles.blockChanger2} row pe-3`}>
                             {t.map(item =>
                                 <div key={item} className={`col ${item === 'חוות דעת' ? 'text-center ps-4' : 'text-center'} ${styles.blockChangerItem}`} style={{ color: 'whitesmoke' }}
                                     onClick={() => setCurrentPage(item)}>

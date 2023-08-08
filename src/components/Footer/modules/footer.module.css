@@ -1,0 +1,80 @@
+.inputs,
+textarea {
+  color: whitesmoke;
+  width: 300px;
+  margin: 5px 0;
+  outline: none;
+  font-size: 1.25rem;
+  background-color: #333;
+  border: 0;
+  /* border-bottom: 2px solid whitesmoke; */
+}
+
+.inputs::placeholder,
+textarea::placeholder {
+  color: whitesmoke;
+}
+
+/* .inputs:focus,textarea:focus {
+  border-bottom: 2px solid whitesmoke;
+} */
+
+/* .inputs:hover,textarea:hover{
+  border-bottom: 2px solid whitesmoke;
+} */
+
+.divInputs {
+  width: 300px;
+  margin: 8px auto;
+}
+
+.divInputs::after {
+  display: block;
+  content: '';
+  margin: auto;
+  width: 0;
+  height: 2px;
+  background-color: whitesmoke;
+  transition: width 0.3s;
+  position: relative;
+  z-index: 20;
+}
+
+.divInputs:hover::after {
+  width: 100%;
+}
+
+.divInputs {
+  border-bottom: 2px solid whitesmoke;
+}
+
+.pContact1 {
+    font-size: 1.2rem;
+}
+
+.btnContact {
+    position: relative;
+    bottom: 55px;
+    width: 200px;
+    font-size: 1.4rem;
+    background-color: inherit;
+    border: 2px solid whitesmoke;
+    color: whitesmoke;
+    transition: 0.5s;
+}
+  
+.btnContact>a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+  
+.btnContact:hover {
+    background-color: whitesmoke;
+    transition: 0.3s;
+    color: #333;
+}
+  
+.btnContact:hover>a {
+    color: #333;
+}
+  

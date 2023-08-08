@@ -2,20 +2,18 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import LoginPage from './LoginRegister/Login/LoginPage'
 import RegisterPage from './LoginRegister/Register/RegisterPage'
-import UserPostsPage from './UserPage/UserPostsPage/UserPostsPage'
 import { useAppSelector } from '../../app/hooks'
 import HomePage from './HomePage/HomePage'
 import UserProfile from './UserPage/UserAccPage/UserProfile'
-import { services } from '../../utils/utils'
 import ServicePage from './HomePage/Services/ServicePage'
 import AdminPanel from './Panels/AdminPanel'
 import ModeratorPanel from './Panels/ModeratorPanel'
+import NewsMain from './HomePage/News/NewsMain'
 
 const Main = () => {
+    const { mode, users } = useAppSelector(state => state);
 
-    const { mode, user, users } = useAppSelector(state => state);
-
-
+   
     return (
         <div className={mode ? 'body__light' : 'body__dark'}>
             <Routes>
@@ -25,12 +23,16 @@ const Main = () => {
                 <Route
                     path={'registration'}
                     element={<RegisterPage />} />
-                <Route
+                {/* <Route
                     path={'userposts'}
-                    element={<UserPostsPage />} />
+                    element={<UserPostsPage />} /> */}
                 <Route
                     path={'/*'}
                     element={<HomePage />} />
+                <Route
+                    path={'news/*'}
+                    element={<NewsMain />} />
+                {/* .filter((item)=>item.roles?.toString().toLocaleLowerCase().includes('user')) */}
                 {users.map(item => <Route
                     path={item._id!}
                     key={item._id}

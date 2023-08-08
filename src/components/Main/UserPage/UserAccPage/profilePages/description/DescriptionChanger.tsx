@@ -5,13 +5,16 @@ import SpecializationChanger from './SpecializationChanger'
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '../../../../../../app/hooks';
 import { updateDescription } from '../../../../../../reducers/AsyncActions/AccountActions';
+import { adminUpdateDescription } from '../../../../../../reducers/AsyncActions/SelectedUserActions';
 
 interface Props {
     description: DescriptionUser | null,
-    setIsOn: (a: boolean) => void
+    setIsOn: (a: boolean) => void,
+    _id: string,
+    variant: number
 }
 
-const DescriptionChanger = ({ description, setIsOn }: Props) => {
+const DescriptionChanger = ({ description, setIsOn, _id, variant }: Props) => {
 
     const dispatch = useAppDispatch();
     const token = useAppSelector(state => state.user.token)
@@ -23,11 +26,21 @@ const DescriptionChanger = ({ description, setIsOn }: Props) => {
 
 
     const handleSubmit = () => {
-        try {
-            dispatch(updateDescription(token!, { experience: exp, main, specialization: specializations, warrantly }))
-            setIsOn(false)
-        } catch (error) {
-            console.log(error);
+        if (variant === 1) {
+            try {
+                dispatch(updateDescription(token!, { experience: exp, main, specialization: specializations, warrantly }, _id))
+                setIsOn(false)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (variant === 2) {
+            try {
+                dispatch(adminUpdateDescription(token!, { experience: exp, main, specialization: specializations, warrantly }, _id))
+                setIsOn(false)
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 
@@ -103,7 +116,7 @@ const DescriptionChanger = ({ description, setIsOn }: Props) => {
                                 onClick={handleAdderSpecialization}
                             />
                         </div>
-                        <input className='col-6' type="submit" value="לשלוח" onClick={() => handleSubmit()} />
+                        <input className='col-6' type="submit" value="לשמור" onClick={() => handleSubmit()} />
                         <div className='text-center'>
                             <p className={`${styles.pass} my-3 pb-0`} style={{ width: '100px', margin: '0 auto' }} onClick={() => setIsOn(false)}>לחזור</p>
                         </div>

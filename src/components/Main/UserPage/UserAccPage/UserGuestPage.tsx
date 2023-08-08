@@ -15,7 +15,7 @@ const UserGuestPage = ({ item }: Props) => {
     const posts: Post[] = useAppSelector(state => state.posts);
 
     const [currentPage, setCurrentPage] = useState('חוות דעת');
-    const t = ["שאלות", "גרפים", "אודות", 'מחירים', 'חוות דעת'];
+    const t = ['חוות דעת', 'מחירים', "אודות", "גרפים", "שאלות"];
 
     const [grade, setGrade] = useState(0);
 
@@ -31,6 +31,7 @@ const UserGuestPage = ({ item }: Props) => {
         } else {
             setGrade(0);
         }
+        setTimeout(() => window.scrollTo(0, 0), 0);
     }, [posts, item])
 
 
@@ -73,7 +74,7 @@ const UserGuestPage = ({ item }: Props) => {
                     <div className='row m-0' style={{ borderTop: '2px solid white', borderBottom: '2px solid white' }}>
                         <div className='col-0 col-lg-6'></div>
                         <div className={`col-12 col-lg-6 m-0 p-0 ${styles.blockChanger1}`}>
-                            <div className={`${styles.blockChanger2} row`}>
+                            <div className={`${styles.blockChanger2} row pe-3`}>
                                 {t.map(item =>
                                     <div key={item} className={`col ${item === 'חוות דעת' ? 'text-center ps-4' : 'text-center'} ${styles.blockChangerItem}`} style={{ color: 'whitesmoke' }}
                                         onClick={() => setCurrentPage(item)}>

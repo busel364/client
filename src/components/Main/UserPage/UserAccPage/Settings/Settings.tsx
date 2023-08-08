@@ -1,22 +1,24 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from '../../modules/userAcc.module.css'
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
-import { fetchImage, updateUser } from '../../../../../reducers/AsyncActions/AccountActions';
+import { deleteUser, fetchImage, getCurUser, updateRoles, updateUser } from '../../../../../reducers/AsyncActions/AccountActions';
 import { base_url } from '../../../../../utils/utils';
 
-interface Props{
-    setChangePassword:(v:boolean)=>void
-    setIsSettingsOn: (v:boolean)=>void
+interface Props {
+    setChangePassword: (v: boolean) => void
+    setIsSettingsOn: (v: boolean) => void
 }
 
 
-const Settings = ({setChangePassword,setIsSettingsOn}:Props) => {
+const Settings = ({ setChangePassword, setIsSettingsOn }: Props) => {
 
     const dispatch = useAppDispatch();
     const user = useAppSelector(state => state.user);
 
-    const [name, setName] = useState(user.fullName);
-    const [tel, setTel] = useState(user.tel);
+    const [name, setName] = useState(user.fullName ? user.fullName : '');
+    const [tel, setTel] = useState(user.tel ? user.tel : '');
+    const [isOn, setIsOn] = useState(false);
+    const [deleteChecker, setDeleteChecker] = useState(false);
 
     const [img, setImg] = useState<any>(null);
     const filePicker = useRef<any>(null);
@@ -51,7 +53,19 @@ const Settings = ({setChangePassword,setIsSettingsOn}:Props) => {
                 )
             )
         }
+        setIsOn(prev => !prev);
     }
+
+    const changeRole = () => {
+        dispatch(updateRoles(user._id!, user.token!, []));
+        setIsOn(prev => !prev);
+    }
+
+
+    useEffect(() => {
+        dispatch(getCurUser(user.token!))
+    }, [dispatch, isOn, user.token])
+
 
 
     return (
@@ -92,6 +106,7 @@ const Settings = ({setChangePassword,setIsSettingsOn}:Props) => {
                     </div>
                     <div className={`${styles.txt_field} text-end`}>
                         <input type="text"
+                            className='text-end'
                             value={name!}
                             onChange={(e) => setName(e.target.value)}
                             required />
@@ -100,13 +115,49 @@ const Settings = ({setChangePassword,setIsSettingsOn}:Props) => {
                     </div>
                     <div className={`${styles.txt_field} text-end`}>
                         <input type="text"
+                            className='text-end'
                             value={tel!}
                             onChange={(e) => setTel(e.target.value)}
                             required />
                         <label>טלפון</label>
                         <span></span>
                     </div>
-                    <input type="submit" value="לשמור שינויים" onClick={() => handleSubmit()} />
+                    <div className={`${styles.divSubmit}`}>
+                        <input className='' type="submit" value="לשמור שינויים" onClick={() => handleSubmit()} />
+                    </div>
+                    <div className='pt-2'>
+                        <button className={`${styles.removeRoleButton}`} onClick={() => handleSubmit()} >להפסיק להיות שותף</button>
+                        {/* <input type="submit" className={styles.removeRoleButton} value="להפסיק להיות שותף" onClick={() => handleSubmit()} /> */}
+                    </div>
+                    <div className='pt-2'>
+                        {!deleteChecker ?
+                            <button
+                                className={`${styles.removeRoleButton}`}
+                                onClick={() => setDeleteChecker(true)}
+                            >למחוק משתמש
+                            </button>
+
+                            :
+
+                            <div className='row row-cols-2'>
+                                <div className='col'>
+                                    <input type="submit" value="לחזור" onClick={() => setDeleteChecker(false)} />
+                                </div>
+                                <button
+                                    className={`${styles.removeRoleButton} col`}
+                                    onClick={() => {
+                                        try {
+                                            dispatch(deleteUser(user._id!))
+                                        } catch (error) {
+                                            console.log(error);
+                                        }
+                                        setIsOn(false)
+                                    }}
+                                >למחוק
+                                </button>
+                            </div>
+                        }
+                    </div>
                     <div className='row'>
                         <p className={`${styles.pass} mt-4 col-12 col-lg-6 m-0`} onClick={() => setChangePassword(true)}>לשינוי סיסמא</p>
                         <p className={`${styles.pass} mt-4 col-12 col-lg-6 m-0`} onClick={() => setIsSettingsOn(false)}>לחזור</p>
@@ -117,5 +168,4 @@ const Settings = ({setChangePassword,setIsSettingsOn}:Props) => {
 
     )
 }
-
 export default Settings

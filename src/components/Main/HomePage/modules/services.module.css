@@ -87,3 +87,27 @@
     isolation: isolate; */
 }
 
+.ellipsisDiv{
+    display: grid;
+    grid-template-rows: 0;
+    overflow: hidden;
+    transition: 0.3s ease-in;
+}
+
+.ellipsisDivOpen{
+    grid-template-rows: 1fr;
+}
+
+.ellipsisP{
+    color: blue;
+    cursor: pointer;
+    transition: 0.15s;
+    display: inline-block;
+    text-align: start;
+    width: 45px;
+}
+
+.ellipsisP:hover{
+    color: rgb(55, 55, 255);
+    transition: 0.15s;
+}

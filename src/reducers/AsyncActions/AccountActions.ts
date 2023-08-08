@@ -1,6 +1,8 @@
 import { AppDispatch, RootState } from "../../app/store"
-import { DescriptionUser, UserData, UserLogin, UserRegister, UserUpdate } from "../../utils/types/UserTypes"
-import { base_url, encodeBase64 } from "../../utils/utils"
+import { DescriptionUser, Prices, UserData, UserLogin, UserRegister, UserUpdate } from "../../utils/types/UserTypes"
+import { base_url, encodeBase64, errors } from "../../utils/utils"
+import { setError } from "../ErrorsReducer/ErrorsReducer"
+import { setIsSuccess } from "../ReturnPasswordReducer/ReturnPasswordReducer"
 import { changeAccess } from "../UserReducer/ChangingPass"
 import { logIn, userDataUpdate } from "../UserReducer/UserReducer"
 import { getUsers } from "./UsersActions"
@@ -9,9 +11,9 @@ import { getUsers } from "./UsersActions"
 export const registerUser = (user: UserRegister) => {
     return (dispatch: AppDispatch) => {
         fetch(`${base_url}/auth/register`, {
-            method: 'Post',
+            method: 'POST',
             body: JSON.stringify(user),
-            mode: 'no-cors',
+            // mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -28,11 +30,10 @@ export const registerUser = (user: UserRegister) => {
             })
             .catch(e => {
                 console.log(e.message);
-                //TODO handle error               
+                dispatch(setError(errors.register))
             })
     }
 }
-
 
 export const fetchUser = (user: UserLogin) => {
     return (dispatch: AppDispatch) => {
@@ -55,9 +56,65 @@ export const fetchUser = (user: UserLogin) => {
             })
             .catch(e => {
                 console.log(e.message);
-                //TODO handle error               
+                //TODO handle error  
+                dispatch(setError(errors.login))
             })
     }
+}
+
+// export const findUserByEmail = (email: string) => {
+//     return (dispatch: AppDispatch) => {
+//         fetch(`${base_url}/getOne/${email}`, {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             }
+//         })
+//             .then(response => {
+//                 if (response.ok) {
+//                     return response.json()
+//                 } else {
+//                     throw new Error(response.status.toString())
+//                 }
+//             })
+//             .then(user => {
+//                 dispatch(setUserReturnPassword(user.email));
+//                 dispatch(returnPassword(email));
+//             })
+//             .catch(e => {
+//                 console.log(e);
+//                 dispatch(setError(errors.returnPass));
+//             })
+//     }
+
+// }
+
+export const returnPassword = (email: string) => {
+    return (dispatch: AppDispatch) => {
+        fetch(`${base_url}/user/returnPassword/${email}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error(response.status.toString())
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    dispatch(setIsSuccess(true));
+                }
+            })
+            .catch(e => {
+                console.log(e);
+                dispatch(setError(errors.returnPass));
+            })
+    }
+
 }
 
 export const getCurUser = (token: string) => {
@@ -78,6 +135,9 @@ export const getCurUser = (token: string) => {
             })
             .then(user => {
                 dispatch(logIn({ ...user, token: token }));
+            })
+            .catch(e => {
+                console.log(e);
             })
     }
 }
@@ -169,11 +229,11 @@ export const updatePrices = (token: string) => {
     }
 }
 
-export const updateDescription = (token: string, description: DescriptionUser) => {
+export const updateDescription = (token: string, description: DescriptionUser, _id: string) => {
     return (dispatch: AppDispatch, getState: () => RootState) => {
         fetch(`${base_url}/user/updateDescription`, {
             method: 'PATCH',
-            body: JSON.stringify({ description, _id: getState().user._id }),
+            body: JSON.stringify({ description, _id }),
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: token
@@ -395,15 +455,13 @@ export const updatePassword = (password: string) => {
     }
 }
 
-
-export const updateUserGrafics = (user: UserUpdate) => {
+export const deleteUser = (id: string) => {
     return (dispatch: AppDispatch, getState: () => RootState) => {
-        fetch(`${base_url}/user/updateGrafics`, {
-            method: 'POST',
-            body: JSON.stringify(user),
+        fetch(`${base_url}/user/${id}`, {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: user.token!
+                Authorization: getState().user.token!
             }
         })
             .then(response => {
@@ -414,7 +472,7 @@ export const updateUserGrafics = (user: UserUpdate) => {
                 }
             })
             .then(data => {
-                dispatch(getCurUser(user.token));
+                dispatch(getUsers());
             })
             .catch(e => {
                 console.log(e.message);
@@ -423,55 +481,3 @@ export const updateUserGrafics = (user: UserUpdate) => {
     }
 }
 
-
-// export const updateUser = (firstName: string, lastName: string) => {
-//     return (dispatch: AppDispatch, getState: () =>RootState) => {
-//         fetch(`${base_url}/user`, {
-//             method: 'PUT',
-//             body: JSON.stringify({ firstName, lastName }),
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 Authorization: getState().loginPage.token!
-//             }
-//         })
-//             .then(response => {
-//                 if (response.ok) {
-//                     return response.json()
-//                 } else {
-//                     throw new Error(response.status.toString())
-//                 }
-//             })
-//             .then(userProfile => {
-//                 dispatch(logIn(userProfile));
-//             })
-//             .catch(e => {
-//                 console.log(e.message);
-//                 //TODO handle error
-//             })
-
-//     }
-// }
-
-// export const changePassword = (oldPassword: string, newPassword: string) => {
-//     return (dispatch: AppDispatch, getState: () => RootState) => {
-//         fetch(`${base_url}/user/password`, {
-//             method: 'PUT',
-//             headers: {
-//                 'X-Password': newPassword,
-//                 Authorization: createToken(getState().loginPage.user!.login, oldPassword)
-//             }
-//         })
-//             .then(response => {
-//                 if (response.ok) {
-//                     dispatch(putToken(createToken(getState().loginPage.user!.login, newPassword)))
-//                 } else {
-//                     throw new Error(response.status.toString())
-//                 }
-//             })
-//             .catch(e => {
-//                 console.log(e.message);
-//                 //TODO handle error
-//             })
-
-//     }
-// }

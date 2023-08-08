@@ -38,7 +38,7 @@ const UserProfileCurPage = ({ user, curPage }: Props) => {
     }
     if (curPage === 'אודות') {
         return (
-            user._id === userState._id ? <Description description={user.description} /> : <DescriptionGuest description={user.description} />
+            user._id === userState._id ? <Description description={user.description} _id={user._id!}/> : <DescriptionGuest description={user.description} />
         )
     }
     if (curPage === 'מחירים') {

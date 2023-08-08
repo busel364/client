@@ -17,3 +17,134 @@
 .imgServiceBlock:hover {
     opacity: 1;
 }
+
+.blockChanger1 {
+    overflow-x: auto;
+    direction: rtl;
+}
+
+.blockChanger2 {
+    min-width: 1550px;
+    /* overflow-x: scroll; */
+    /* overflow-y: hidden; */
+}
+
+.blockChanger1::-webkit-scrollbar {
+    height: 2px;
+}
+
+.blockChanger1::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: inherit;
+}
+
+.blockChanger1::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  /* outline: none; */
+}
+
+.techHelpIcon{
+    position: fixed;
+    border-radius: 50%;
+    left: 5%;
+    bottom: 5%;
+    background-color: whitesmoke;
+    width: 66px;
+    height: 66px;
+    z-index:50;
+    transition: .2s ;
+    cursor: pointer;
+}
+
+.techHelpIcon:hover{
+    transition: .2s;
+}
+
+.sendIcon:hover , 
+.techHelpIcon:hover .icon,
+.closeIcon:hover {
+    color: grey;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.icon{
+    padding-top: 9px;
+    border-radius: 50%;
+    font-size: 3rem;
+    transition: .2s;
+}
+
+.closeIcon{
+    transition: .2s;
+}
+
+.techBlock{
+    position: fixed;
+    border-radius: 15px;
+    left: 3%;
+    bottom: 5%;
+    background-color: whitesmoke;
+    width: 300px;
+    height: 500px;
+    z-index:50;
+    box-shadow: -5px 10px 20px black;
+    overflow: hidden;
+}
+
+.techTextArea{
+    resize: none;
+    /* min-height:4rem; */
+    height: 78px;
+    color: black;
+    font-size: 1.3rem;
+    background-color: white;
+    direction: rtl;
+}
+.techTextArea::placeholder{
+    color: black;
+}
+
+.techTextArea::-webkit-scrollbar {
+    width: 5px;
+}
+
+.techTextArea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: inherit;
+}
+
+.techTextArea::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  /* outline: none; */
+}
+
+
+.titleLink{
+    color: #333;
+    text-decoration: none;
+    transition: all .2s;
+}
+
+.titleLink:hover {
+    color: black;
+    cursor: pointer;
+    /* text-decoration: underline; */
+    /* transition: all .2s; */
+}
+
+.titleLink::after {
+    display: block;
+    content: '';
+    margin: auto;
+    width: 0;
+    height: 2.5px;
+    background-color: black;
+    transition: width 0.3s;
+}
+
+.titleLink:hover::after {
+    width: 100%;
+}
